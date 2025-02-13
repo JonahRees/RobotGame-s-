@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgobstn3gxiee"]
+
+[ext_resource type="Script" path="res://credits.gd" id="1_4l0w0"]
+[ext_resource type="Script" path="res://node_2d.gd" id="2_ea168"]
+[ext_resource type="PackedScene" uid="uid://erwygu48bib5" path="res://timer.tscn" id="2_swn1f"]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_4l0w0")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = -140.0
+offset_top = -48.0
+offset_right = 171.0
+offset_bottom = 95.0
+text = "Game made by Jonah Rees
+FRC TEAM 6357: The Spring Konstant
+Made using Godot Game Engine.
+
+
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -29.0
+offset_top = -73.0
+offset_right = 121.0
+offset_bottom = -33.0
+text = "CREDITS:"
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_ea168")
+
+[node name="TIMER" parent="." instance=ExtResource("2_swn1f")]
+
+[node name="RichTextLabel" parent="TIMER" index="0"]
+offset_left = -102.0
+offset_top = 37.0
+offset_right = 142.0
+offset_bottom = 77.0
+
+[editable path="TIMER"]

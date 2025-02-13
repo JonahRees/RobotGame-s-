@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1t33y31dakp2"]
+
+[ext_resource type="Script" path="res://scenes/button.gd" id="1_jukpy"]
+[ext_resource type="Texture2D" uid="uid://dsbtw50hvwchb" path="res://button.png" id="2_hljgk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbu6v"]
+size = Vector2(14, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31xu6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hljgk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="button" type="Node2D"]
+script = ExtResource("1_jukpy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_fbu6v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+texture_filter = 3
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_31xu6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

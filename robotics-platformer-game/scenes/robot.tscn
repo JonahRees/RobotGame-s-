@@ -1,0 +1,369 @@
+[gd_scene load_steps=30 format=3 uid="uid://dx6ca3retvmal"]
+
+[ext_resource type="Script" path="res://scripts/robot_physics_body.gd" id="1_4nsjd"]
+[ext_resource type="Script" path="res://scripts/robot.gd" id="1_s2uae"]
+[ext_resource type="Script" path="res://scripts/arm.gd" id="2_kic6w"]
+[ext_resource type="Texture2D" uid="uid://coojiy5a1n7ja" path="res://konnie main.png" id="2_ncsbp"]
+[ext_resource type="Script" path="res://scripts/climb.gd" id="3_ivir0"]
+[ext_resource type="Texture2D" uid="uid://yt3rrhn4xi8u" path="res://assets/lifty.png" id="3_x5u65"]
+[ext_resource type="Texture2D" uid="uid://b43ms7hlct37d" path="res://assets/launchy.png" id="4_1vy0a"]
+[ext_resource type="Script" path="res://scripts/intake.gd" id="4_xk331"]
+[ext_resource type="Texture2D" uid="uid://ccuwtar4f3ggj" path="res://springs.png" id="5_a1kho"]
+[ext_resource type="Texture2D" uid="uid://dm11tobi8y3qo" path="res://assets/arms.png" id="5_dq3ba"]
+[ext_resource type="Texture2D" uid="uid://bcb3pfxhdoh2x" path="res://grapple.png" id="5_v2bbv"]
+[ext_resource type="Texture2D" uid="uid://dp7fqwdaooblu" path="res://blank.png" id="6_83lrh"]
+[ext_resource type="Texture2D" uid="uid://b7xcy6iqof6ra" path="res://grapple2.png" id="9_ehuwu"]
+[ext_resource type="Texture2D" uid="uid://b7kcj51c6lcy1" path="res://konnie arm.png" id="11_nv7rv"]
+[ext_resource type="PackedScene" uid="uid://hppp46clt13b" path="res://editor.tscn" id="13_aw4t7"]
+[ext_resource type="Texture2D" uid="uid://bnnq1osjopyk5" path="res://circlepiece.png" id="13_jjpv1"]
+[ext_resource type="Texture2D" uid="uid://b8vke7nfpdkgb" path="res://squarepiece.png" id="14_86lry"]
+[ext_resource type="Texture2D" uid="uid://bnffwgmrx25g7" path="res://trianglepiece.png" id="15_vy8ho"]
+[ext_resource type="PackedScene" uid="uid://erwygu48bib5" path="res://timer.tscn" id="18_xsiyu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ovob"]
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8854"]
+size = Vector2(26.5, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbb0s"]
+size = Vector2(20, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0hia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x5u65")
+}],
+"loop": true,
+"name": &"extendo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1vy0a")
+}],
+"loop": true,
+"name": &"launcher",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dq3ba")
+}],
+"loop": true,
+"name": &"rotator",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwktm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_v2bbv")
+}],
+"loop": true,
+"name": &"grapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ehuwu")
+}],
+"loop": true,
+"name": &"grapple2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a1kho")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_83lrh")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_nv7rv")
+}],
+"loop": true,
+"name": &"zipline",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ukyy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ncsbp")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f252q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_jjpv1")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_86lry")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_vy8ho")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gtkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmrt8"]
+size = Vector2(7, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4uv"]
+size = Vector2(7, 12)
+
+[node name="Robot" type="Node2D"]
+z_index = 12
+script = ExtResource("1_s2uae")
+
+[node name="Physics" type="CharacterBody2D" parent="."]
+collision_layer = 5
+script = ExtResource("1_4nsjd")
+
+[node name="Collision" type="CollisionShape2D" parent="Physics"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_6ovob")
+
+[node name="Camera2D" type="Camera2D" parent="Physics"]
+offset = Vector2(0, -30)
+zoom = Vector2(3.75, 3.75)
+
+[node name="zipline_detector" type="Area2D" parent="Physics"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/zipline_detector"]
+position = Vector2(0.75, -3.5)
+shape = SubResource("RectangleShape2D_b8854")
+
+[node name="grapple_detector" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/grapple_detector"]
+position = Vector2(0, -111)
+shape = SubResource("RectangleShape2D_cbb0s")
+
+[node name="Arms" type="Node2D" parent="Physics"]
+script = ExtResource("2_kic6w")
+
+[node name="Area2D" type="Area2D" parent="Physics/Arms"]
+
+[node name="ArmAnimator" type="AnimationPlayer" parent="Physics/Arms/Area2D"]
+
+[node name="Arm" type="AnimatedSprite2D" parent="Physics/Arms/Area2D"]
+z_index = 7
+position = Vector2(3, 3)
+scale = Vector2(0.052375, 0.07175)
+sprite_frames = SubResource("SpriteFrames_q0hia")
+animation = &"rotator"
+
+[node name="ArmCollision" type="CollisionShape2D" parent="Physics/Arms/Area2D"]
+
+[node name="Climbs" type="Node2D" parent="Physics"]
+script = ExtResource("3_ivir0")
+
+[node name="Climb" type="AnimatedSprite2D" parent="Physics/Climbs"]
+position = Vector2(-3, 5)
+rotation = -6.28319
+scale = Vector2(0.213207, 0.230044)
+sprite_frames = SubResource("SpriteFrames_lwktm")
+animation = &"grapple2"
+
+[node name="Base" type="AnimatedSprite2D" parent="Physics"]
+z_index = 7
+position = Vector2(-0.499998, 2.5)
+scale = Vector2(0.0976431, 0.101852)
+sprite_frames = SubResource("SpriteFrames_6ukyy")
+animation = &"moving"
+
+[node name="Intakes" type="Node2D" parent="Physics"]
+
+[node name="Intake" type="AnimatedSprite2D" parent="Physics/Intakes"]
+z_index = 7
+texture_filter = 3
+position = Vector2(-0.375001, 3.6875)
+scale = Vector2(0.0223958, 0.0221354)
+sprite_frames = SubResource("SpriteFrames_f252q")
+animation = &"square"
+script = ExtResource("4_xk331")
+
+[node name="Editor" parent="Physics" instance=ExtResource("13_aw4t7")]
+visible = false
+position = Vector2(-8, -44)
+scale = Vector2(0.18, 0.187)
+
+[node name="Death" type="Area2D" parent="Physics"]
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="detector" type="CollisionShape2D" parent="Physics/Death"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_7gtkg")
+
+[node name="Grapple1" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="detector1" type="CollisionShape2D" parent="Physics/Grapple1"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_gmrt8")
+
+[node name="Grapple2" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="detector1" type="CollisionShape2D" parent="Physics/Grapple2"]
+position = Vector2(-0.5, -34)
+shape = SubResource("RectangleShape2D_gmrt8")
+
+[node name="Grapple3" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="detector1" type="CollisionShape2D" parent="Physics/Grapple3"]
+position = Vector2(0, -56.5)
+shape = SubResource("RectangleShape2D_gmrt8")
+
+[node name="Grapple4" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="detector1" type="CollisionShape2D" parent="Physics/Grapple4"]
+position = Vector2(0, -79)
+shape = SubResource("RectangleShape2D_gmrt8")
+
+[node name="Grapple5" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple5"]
+position = Vector2(-0.5, -99)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="Grapple6" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple6"]
+position = Vector2(0, -121)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="Grapple7" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple7"]
+position = Vector2(0, -142)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="Grapple8" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple8"]
+position = Vector2(0, -163)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="Grapple9" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple9"]
+position = Vector2(0, -184)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="Grapple10" type="Area2D" parent="Physics"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Grapple10"]
+position = Vector2(0, -205)
+shape = SubResource("RectangleShape2D_ui4uv")
+
+[node name="TIMER" parent="Physics" instance=ExtResource("18_xsiyu")]
+
+[node name="RichTextLabel" parent="Physics/TIMER" index="0"]
+z_index = 30
+offset_left = -308.0
+offset_top = -211.0
+offset_right = 345.0
+offset_bottom = -77.0
+text = "Current time - "
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="Physics/zipline_detector" to="Physics" method="_on_zipline_detector_body_entered"]
+[connection signal="body_exited" from="Physics/zipline_detector" to="Physics" method="_on_zipline_detector_body_exited"]
+[connection signal="body_entered" from="Physics/grapple_detector" to="Physics" method="_on_grapple_detector_body_entered"]
+[connection signal="body_exited" from="Physics/grapple_detector" to="Physics" method="_on_grapple_detector_body_exited"]
+[connection signal="body_entered" from="Physics/Death" to="Physics" method="_on_death_body_entered"]
+[connection signal="body_entered" from="Physics/Grapple1" to="Physics" method="_on_grapple_1_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple1" to="Physics" method="_on_grapple_1_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple2" to="Physics" method="_on_grapple_2_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple2" to="Physics" method="_on_grapple_2_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple3" to="Physics" method="_on_grapple_3_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple3" to="Physics" method="_on_grapple_3_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple4" to="Physics" method="_on_grapple_4_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple4" to="Physics" method="_on_grapple_4_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple5" to="Physics" method="_on_grapple_5_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple5" to="Physics" method="_on_grapple_5_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple6" to="Physics" method="_on_grapple_6_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple6" to="Physics" method="_on_grapple_6_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple7" to="Physics" method="_on_grapple_7_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple7" to="Physics" method="_on_grapple_7_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple8" to="Physics" method="_on_grapple_8_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple8" to="Physics" method="_on_grapple_8_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple9" to="Physics" method="_on_grapple_9_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple9" to="Physics" method="_on_grapple_9_body_exited"]
+[connection signal="body_entered" from="Physics/Grapple10" to="Physics" method="_on_grapple_10_body_entered"]
+[connection signal="body_exited" from="Physics/Grapple10" to="Physics" method="_on_grapple_10_body_exited"]
+
+[editable path="Physics/TIMER"]

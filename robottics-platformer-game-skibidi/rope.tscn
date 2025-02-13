@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c16ischc0d52k"]
+
+[ext_resource type="Texture2D" uid="uid://bexf7ds1hpdwx" path="res://rope.png" id="1_e5j6h"]
+[ext_resource type="Script" path="res://rope.gd" id="2_2jloj"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="3_tpfnd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l4eyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5j6h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6yft"]
+size = Vector2(2, 2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w0upe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5j6h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Rope" type="Node2D"]
+texture_filter = 3
+texture_repeat = 2
+script = ExtResource("2_2jloj")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 4096
+collision_mask = 4096
+script = ExtResource("3_tpfnd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+visible = false
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_l4eyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 8)
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_f6yft")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w0upe")
+offset = Vector2(0, -8)

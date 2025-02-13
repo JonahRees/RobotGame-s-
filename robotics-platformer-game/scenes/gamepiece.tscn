@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://q65y6hljtsh7"]
+
+[ext_resource type="Script" path="res://scripts/gamepiece.gd" id="1_jck26"]
+[ext_resource type="Texture2D" uid="uid://bnnq1osjopyk5" path="res://circlepiece.png" id="2_6yv6c"]
+[ext_resource type="Script" path="res://scripts/gamepiece2.gd" id="3_st6pd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l0t84"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewimi"]
+atlas = SubResource("CompressedTexture2D_l0t84")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wasej"]
+atlas = SubResource("CompressedTexture2D_l0t84")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xmb4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6yv6c")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewimi")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wasej")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uh3qh"]
+size = Vector2(8, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uoek"]
+size = Vector2(8, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl0v4"]
+radius = 6.0
+
+[node name="Gamepiece" type="Node2D"]
+z_index = 10
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 32770
+collision_mask = 32770
+script = ExtResource("1_jck26")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-0.125, 0.125)
+scale = Vector2(0.0296875, 0.0296875)
+sprite_frames = SubResource("SpriteFrames_3xmb4")
+animation = &"circle"
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_st6pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_uh3qh")
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_5uoek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_pl0v4")
+
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D2" to="CharacterBody2D" method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/Area2D2" to="CharacterBody2D" method="_on_area_2d_2_body_exited"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://xj6vh4ev0lbb"]
+
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_jo06r"]
+[ext_resource type="Texture2D" uid="uid://du1q3klho8yf4" path="res://chgeckpoint.png" id="2_qgo7x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dunr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qgo7x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2trhl"]
+radius = 19.0
+height = 38.0
+
+[node name="checkpoint" type="Node2D"]
+script = ExtResource("1_jo06r")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(8, 1)
+scale = Vector2(0.0539179, 0.0513889)
+sprite_frames = SubResource("SpriteFrames_dunr5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_2trhl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Area2D"]
+z_index = 10
+texture_filter = 3
+offset_left = -39.0
+offset_top = -32.0
+offset_right = 52.0
+offset_bottom = 1.0
+theme_override_font_sizes/normal_font_size = 9
+text = "Press Y to interact."
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

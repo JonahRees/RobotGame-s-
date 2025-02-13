@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkl44kjejfvhb"]
+
+[ext_resource type="Script" path="res://gamepiece_3.gd" id="1_3nsgp"]
+[ext_resource type="Script" path="res://gamepiece3.gd" id="2_0dj7g"]
+[ext_resource type="Texture2D" uid="uid://bnffwgmrx25g7" path="res://trianglepiece.png" id="3_smxrx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uh3qh"]
+size = Vector2(8, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uoek"]
+size = Vector2(8, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl0v4"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvgop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_smxrx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Gamepiece3" type="Node2D"]
+z_index = 10
+script = ExtResource("1_3nsgp")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 32770
+collision_mask = 32770
+script = ExtResource("2_0dj7g")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_uh3qh")
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_5uoek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_pl0v4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 3
+position = Vector2(0, -2)
+scale = Vector2(0.04, 0.04)
+sprite_frames = SubResource("SpriteFrames_rvgop")
+
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D2" to="CharacterBody2D" method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/Area2D2" to="CharacterBody2D" method="_on_area_2d_2_body_exited"]

@@ -1,0 +1,261 @@
+[gd_scene load_steps=27 format=3 uid="uid://hppp46clt13b"]
+
+[ext_resource type="Texture2D" uid="uid://b7nrnscd0tnan" path="res://checkpointthing.png" id="1_kkh4j"]
+[ext_resource type="Script" path="res://editor.gd" id="1_xd8dm"]
+[ext_resource type="Texture2D" uid="uid://dp7fqwdaooblu" path="res://blank.png" id="2_r12yg"]
+[ext_resource type="Texture2D" uid="uid://bnnq1osjopyk5" path="res://circlepiece.png" id="4_uy874"]
+[ext_resource type="Texture2D" uid="uid://b8vke7nfpdkgb" path="res://squarepiece.png" id="5_j6bgo"]
+[ext_resource type="Texture2D" uid="uid://bnffwgmrx25g7" path="res://trianglepiece.png" id="6_n11pf"]
+[ext_resource type="Script" path="res://scripts/intake.gd" id="7_y5qef"]
+[ext_resource type="Texture2D" uid="uid://csp45eyxtm5ss" path="res://grapplinghook.png" id="8_uppf0"]
+[ext_resource type="Texture2D" uid="uid://detypjm8op80o" path="res://springsthing.png" id="9_1j33e"]
+[ext_resource type="Texture2D" uid="uid://cwmov66pvcv1o" path="res://zipliney.png" id="10_et34d"]
+[ext_resource type="Texture2D" uid="uid://c4t5yq3jnxk82" path="res://assets/lifter.png" id="11_1fii1"]
+[ext_resource type="Texture2D" uid="uid://c2tntifd6jgwc" path="res://keys1.png" id="11_pr6bs"]
+[ext_resource type="Texture2D" uid="uid://c42amvfc0tfmg" path="res://assets/launcher.png" id="12_cx060"]
+[ext_resource type="Texture2D" uid="uid://byfrrpxea2te8" path="res://keys2.png" id="12_p4a3w"]
+[ext_resource type="Texture2D" uid="uid://daf354f7erhgr" path="res://assets/x.png" id="12_s22fa"]
+[ext_resource type="Texture2D" uid="uid://3eepqs1fjyg6" path="res://keys3.png" id="13_j7def"]
+[ext_resource type="Texture2D" uid="uid://bdqoxb55dtm2j" path="res://assets/forklift.png" id="13_klo13"]
+[ext_resource type="Texture2D" uid="uid://dtvqftxeibmck" path="res://assets/a.png" id="14_mj5e6"]
+[ext_resource type="Texture2D" uid="uid://37noc7hrvpoh" path="res://assets/b.png" id="15_i06n2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_illwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kkh4j")
+}],
+"loop": true,
+"name": &"editor",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r12yg")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rimj3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uy874")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r12yg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r12yg")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j6bgo")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_n11pf")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rb0j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_uppf0")
+}],
+"loop": true,
+"name": &"grapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_1j33e")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r12yg")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_et34d")
+}],
+"loop": true,
+"name": &"zipline",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vu85e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_1fii1")
+}],
+"loop": true,
+"name": &"extendo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_cx060")
+}],
+"loop": true,
+"name": &"launcher",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r12yg")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_klo13")
+}],
+"loop": true,
+"name": &"rotator",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mts27"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_pr6bs")
+}],
+"loop": true,
+"name": &"computer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_i06n2")
+}],
+"loop": true,
+"name": &"xbox",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvcg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_p4a3w")
+}],
+"loop": true,
+"name": &"computer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_mj5e6")
+}],
+"loop": true,
+"name": &"xbox",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuo36"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_s22fa")
+}],
+"loop": true,
+"name": &"Xbox",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_j7def")
+}],
+"loop": true,
+"name": &"computer",
+"speed": 5.0
+}]
+
+[node name="Editor" type="Node2D"]
+z_index = 20
+scale = Vector2(1, 0.973)
+script = ExtResource("1_xd8dm")
+
+[node name="Background" type="AnimatedSprite2D" parent="."]
+z_index = 20
+scale = Vector2(2, 1.946)
+sprite_frames = SubResource("SpriteFrames_illwi")
+animation = &"editor"
+
+[node name="Intake" type="AnimatedSprite2D" parent="."]
+z_index = 20
+texture_filter = 3
+position = Vector2(-1302, 7.62939e-06)
+scale = Vector2(2, 1.946)
+sprite_frames = SubResource("SpriteFrames_rimj3")
+animation = &"circle"
+script = ExtResource("7_y5qef")
+
+[node name="Climb" type="AnimatedSprite2D" parent="."]
+z_index = 20
+position = Vector2(22, 85.3032)
+rotation = -6.28319
+scale = Vector2(1.01837, 1.01473)
+sprite_frames = SubResource("SpriteFrames_5rb0j")
+animation = &"grapple"
+
+[node name="Arm" type="AnimatedSprite2D" parent="."]
+z_index = 20
+position = Vector2(1402, -26.7215)
+scale = Vector2(1.0145, 1.13847)
+sprite_frames = SubResource("SpriteFrames_vu85e")
+animation = &"launcher"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 20
+position = Vector2(1503, 768.756)
+scale = Vector2(1, 0.973)
+sprite_frames = SubResource("SpriteFrames_mts27")
+animation = &"xbox"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+z_index = 20
+position = Vector2(84, 756.423)
+scale = Vector2(1, 0.973)
+sprite_frames = SubResource("SpriteFrames_kvcg3")
+animation = &"xbox"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+z_index = 20
+position = Vector2(-1240, 671.12)
+scale = Vector2(1, 0.973)
+sprite_frames = SubResource("SpriteFrames_tuo36")
+animation = &"Xbox"
