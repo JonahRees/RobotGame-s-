@@ -62,8 +62,6 @@ func _process(_delta: float) -> void:
 		print("restart")
 		gp.restart()
 		robot.restart()
-	if Input.is_action_just_pressed("skip"):
-		victory()
 	if Input.is_action_just_pressed("restartlevel"):
 		gp.start(level)
 		robot.start(level)

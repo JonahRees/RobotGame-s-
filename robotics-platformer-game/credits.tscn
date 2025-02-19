@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgobstn3gxiee"]
+[gd_scene load_steps=5 format=3 uid="uid://bgobstn3gxiee"]
 
 [ext_resource type="Script" path="res://credits.gd" id="1_4l0w0"]
 [ext_resource type="Script" path="res://node_2d.gd" id="2_ea168"]
 [ext_resource type="PackedScene" uid="uid://erwygu48bib5" path="res://timer.tscn" id="2_swn1f"]
+[ext_resource type="Script" path="res://highscore.gd" id="4_l5pta"]
 
 [node name="Credits" type="Node2D"]
 script = ExtResource("1_4l0w0")
@@ -39,5 +40,14 @@ offset_left = -102.0
 offset_top = 37.0
 offset_right = 142.0
 offset_bottom = 77.0
+
+[node name="Highscore" type="Node2D" parent="."]
+script = ExtResource("4_l5pta")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = -135.0
+offset_top = 88.0
+offset_right = 137.0
+offset_bottom = 131.0
 
 [editable path="TIMER"]

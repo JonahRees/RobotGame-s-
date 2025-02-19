@@ -27,7 +27,10 @@ func add():
 		texty.visible=false
 	if level==7:
 		texty.visible=true
-		texty.text="Final time - "+str(minutes)+":"+str(seconds)
+		hugs=str(seconds)
+		if seconds<10:
+			hugs="0"+hugs
+		texty.text="Final time - "+str(minutes)+":"+hugs
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if not e:
